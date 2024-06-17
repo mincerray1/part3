@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mongoose = require('mongoose')
 
 if (process.argv.length < 3) {
@@ -38,7 +39,7 @@ if (process.argv.length == 3) {
     })    
 }
 else if (process.argv.length > 3) {
-    person.save().then(result => {
+    person.save().then(() => {
         console.log('Person saved!')
         mongoose.connection.close()
     })

@@ -41,7 +41,7 @@ app.get('/api/persons', (request, response, next) => {
     }
 })
 
-app.get('/info', async (request, response, next) => {
+app.get('/info', async (request, response) => {
     const count = await Person.countDocuments({})
     const currentDate = new Date().toDateString()
         return response.send(`
@@ -62,7 +62,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndDelete(request.params.id)
-        .then(result => {
+        .then(() => {
             response.status(204).end()
         }).catch(error => next(error))
 })
@@ -124,6 +124,7 @@ const errorHandler = (error, request, response, next) => {
 }
 app.use(errorHandler)
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
